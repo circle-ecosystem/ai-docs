@@ -93,9 +93,9 @@ You make an excellent point. Yes, we can definitely combine these components for
     - *Administrative workflow for connecting and configuring organization-specific identity providers (Azure AD, Okta, etc.)*
 - **4.3 Tenant SSO Login Experience** (Phase-3)
     - *User journey for authenticating via the organization's configured SSO provider*
-- **4.4 Ecosystem Single Sign-On** (Phase-1)
+- **4.4 Ecosystem Single Sign-On** (Phase-2)
     - *Cross-application authentication that allows users to seamlessly move between Circle Hub and Partner Apps without re-authenticating*
-- **4.5 Unified Sign-Out Experience** (Phase-1)
+- **4.5 Unified Sign-Out Experience** (Phase-2)
     - *Coordinated logout mechanism that ensures signing out from one application signs the user out from all Circle ecosystem applications on their device*
 - **4.6 Multi-Factor Authentication Setup** (Phase-3)
     - *Process for enabling and configuring additional authentication factors*
