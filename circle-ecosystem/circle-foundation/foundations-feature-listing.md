@@ -33,6 +33,12 @@
 ##### Features
 1. **Organization Creation and Setup**
 
+#### 4. Member Onboarding Module
+##### Features
+1. **Invitation Acceptance and Profile Setup**
+
+
+
 ### Organization Administrator
 
 #### 1. Admin Dashboard Module
@@ -158,6 +164,37 @@
 - Setup completion confirmation screen
 - Getting started guide/walkthrough
 - Admin dashboard with prominent next-step suggestions
+
+#### 4.1 Invitation Acceptance and Profile Setup
+
+**Entry Point(s):**
+- Invitation email with secure link
+- Invitation acceptance landing page
+- Public invitation URL
+
+**Exit Points:**
+- Personal overview dashboard
+- Guided member tour
+
+**User Stories:**
+- As an invited user, I want to easily understand and accept my invitation to an organization
+- As an invited user, I want to create my account with minimal friction
+- As an invited user, I want to set up my profile with relevant professional information
+- As an invited user, I want to understand what's expected of me in the organization
+- As an invited user, I want to learn about the platform's key features relevant to my role
+- As an invited user, I want to be guided through any required onboarding steps
+
+**Screen Listing:**
+- Invitation landing page
+- Email verification (if not pre-verified)
+- Account creation form
+- Profile setup (name, job title, contact info)
+- Avatar selection/upload
+- Department and role confirmation
+- Platform introduction and feature highlights
+- Onboarding progress indicators
+- Member dashboard with getting started guide
+
 
 ### Organization Administrator Features
 
@@ -513,27 +550,38 @@ graph TD
     %% Guest User Platform Discovery Module
     A1[Public Landing Experience] --> B1[Authentication and Session Management]
     A1 --> C1[Organization Creation and Setup]
+    A1 --> D1[Invitation Acceptance and Profile Setup]
     
     %% Organization Creation Flow
     C1 --> B1
     B1 --> C1
-    C1 --> D1[Admin Overview Dashboard]
+    C1 --> E1[Admin Overview Dashboard]
+    
+    %% Invitation Flow
+    D1 --> B1
+    B1 --> D1
+    D1 --> J1[Personal Overview Dashboard]
     
     %% Organization Administrator - Admin Dashboard Module
-    B1[Authentication and Session Management] --> D1[Admin Overview Dashboard]
+    B1[Authentication and Session Management] --> E1[Admin Overview Dashboard]
     
     %% Organization Administrator - People Management Module
-    D1 --> P1[User Directory & Management]
+    E1 --> P1[User Directory & Management]
     P1 --> P2[User Provisioning & Lifecycle]
     P1 --> P3[User Profile & Assignments]
     
     %% Organization Administrator - Organization Configuration Module
-    D1 --> O1[Departments & Teams Management]
-    D1 --> O2[Locations Management]
-    D1 --> O3[Job Designations Management]
+    E1 --> O1[Departments & Teams Management]
+    E1 --> O2[Locations Management]
+    E1 --> O3[Job Designations Management]
     
     %% Organization Administrator - Organization Settings Module
-    D1 --> S1[Organization Profile Management]
+    E1 --> S1[Organization Profile Management]
+    
+    %% Organization Member - User Dashboard Module
+    B1[Authentication and Session Management] --> J1[Personal Overview Dashboard]
+    
+
     
     %% Organization Member - User Dashboard Module
     B1[Authentication and Session Management] --> J1[Personal Overview Dashboard]
