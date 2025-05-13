@@ -2,9 +2,15 @@
 Identify the pre-requisites deliverables for TeamSync prior to initiating Agentic Coding. 
 
 ## TeamSync Vision Document 
-- [ ] Define App Goals
+- [x] Define App Goals
 - [ ] Define High Level Features
+  - [x] Chat App
+  - [ ] Call App
+  - [ ] RDP App
 - [ ] Define High Level Architecture Requirements
+  - [ ] Chat App
+  - [ ] Call App
+  - [ ] RDP App
 
 ## Tech Stack Document 
 - [ ] Define Tech Stack Document Template 
