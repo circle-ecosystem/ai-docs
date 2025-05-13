@@ -294,18 +294,6 @@ CREATE TABLE organizations (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Department/Team table
-CREATE TABLE organization_units (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  tenant_id UUID NOT NULL,
-  organization_id UUID REFERENCES organizations(id) NOT NULL,
-  name TEXT NOT NULL,
-  type TEXT NOT NULL, -- 'department', 'team', etc.
-  parent_id UUID REFERENCES organization_units(id),
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
 -- Users table (renamed from user_profiles)
 CREATE TABLE users (
   id UUID PRIMARY KEY REFERENCES auth.users(id),
@@ -318,16 +306,6 @@ CREATE TABLE users (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Reporting structure
-CREATE TABLE reporting_lines (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  tenant_id UUID NOT NULL,
-  manager_id UUID REFERENCES users(id) NOT NULL,
-  report_id UUID REFERENCES users(id) NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW(),
-  UNIQUE(manager_id, report_id)
-);
 ```
 
 ### 6.2 Row-Level Security Policies
@@ -335,26 +313,17 @@ CREATE TABLE reporting_lines (
 ```sql
 -- Enable RLS on all tables
 ALTER TABLE organizations ENABLE ROW LEVEL SECURITY;
-ALTER TABLE organization_units ENABLE ROW LEVEL SECURITY;
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
-ALTER TABLE reporting_lines ENABLE ROW LEVEL SECURITY;
 
 -- Standard tenant isolation policy for each table
 CREATE POLICY "Tenant isolation for organizations" 
 ON organizations FOR ALL 
 USING (tenant_id::text = auth.tenant_id());
 
-CREATE POLICY "Tenant isolation for organization_units" 
-ON organization_units FOR ALL 
-USING (tenant_id::text = auth.tenant_id());
-
 CREATE POLICY "Tenant isolation for users" 
 ON users FOR ALL 
 USING (tenant_id::text = auth.tenant_id());
 
-CREATE POLICY "Tenant isolation for reporting_lines" 
-ON reporting_lines FOR ALL 
-USING (tenant_id::text = auth.tenant_id());
 ```
 
 ## 7. API Design

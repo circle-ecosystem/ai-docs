@@ -2,19 +2,25 @@
 
 ## User Persona Listing
 
-### 1. Guest User
+### Guest User
 **Description**: Unauthenticated users who are discovering the Circle Ecosystem for the first time or returning users who need to sign in.
+
 **Objectives**: Learn about the platform, create a new organization, or sign in to an existing account.
+
 **Characteristics**: May have varying levels of technical expertise; primarily interested in quick access or understanding the value proposition.
 
-### 2. Organization Administrator (Org Admin)
+### Organization Administrator (Org Admin)
 **Description**: Authenticated users with administrative privileges for managing their organization within the Circle Ecosystem.
+
 **Objectives**: Configure organization settings, manage users, define structure, and ensure proper system setup.
+
 **Characteristics**: Responsible for organizational governance; needs comprehensive controls and visibility across the organization.
 
-### 3. Organization Member (Org Member)
+### Organization Member (Org Member)
 **Description**: Regular authenticated users who are part of an organization within the Circle Ecosystem.
+
 **Objectives**: Participate in organization activities, manage personal profile, and access relevant organizational information.
+
 **Characteristics**: Focused on productivity and collaboration within their specific roles and departments.
 
 ## Feature Listing
