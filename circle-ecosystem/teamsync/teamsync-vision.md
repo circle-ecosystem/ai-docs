@@ -267,6 +267,7 @@
 
 ## Define High Level Architecture Requirements
 - Authentication, Contacts, User Profile, User Presence will be imported from Circle Foundations. 
+- Vertical Slice Architecture shall be used for code structuring.
 - Platform support:
   - iOS
   - Android
@@ -280,3 +281,8 @@
 - There should be flexibility to have custom UI for desktop vs mobile platforms. 
 - offline-first 
 - multi-device support 
+- The client apps are built using Flutter
+- The backend is built using Supabase (DB, realtime, storage, edge functions etc.)
+- Single tenant application.
+- For chat feature implementation, we will use the pubnub chat sdk (https://www.pubnub.com/docs/chat/overview#) as reference for our flutter sdk (api) implementation. We will do our implementation, but we will follow the type definition and api structures (input and output) specified in the pubnub chat sdk. The database design shall support the implementation of the above apis. The presentation layer also will need to talk to these apis. (https://github.com/pubnub/js-chat/tree/master/lib/src)
+- For calls feature, we will use Livekit.io (client sdks, SFU, livekit server).

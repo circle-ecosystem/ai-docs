@@ -9,8 +9,8 @@ Identify the pre-requisites deliverables for TeamSync prior to initiating Agenti
 - [x] Define High Level Architecture Requirements
 
 ## Tech Stack Document 
-- [ ] Define Tech Stack Document Template 
-- [ ] Define detailed Tech Stack 
+- [x] Define Tech Stack Document Template 
+- [x] Define detailed Tech Stack 
 
 ## Vertical Slices Identification 
 - [ ] Identify the Vertical Slices for TeamSync
