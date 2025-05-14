@@ -3,12 +3,10 @@ Identify the pre-requisites deliverables for TeamSync prior to initiating Agenti
 
 ## TeamSync Vision Document 
 - [x] Define App Goals
-- [ ] Define High Level Features
+- [x] Define High Level Features
   - [x] Chat App
-  - [ ] Call App
-- [ ] Define High Level Architecture Requirements
-  - [ ] Chat App
-  - [ ] Call App
+  - [x] Call App
+- [x] Define High Level Architecture Requirements
 
 ## Tech Stack Document 
 - [ ] Define Tech Stack Document Template 

@@ -277,4 +277,6 @@
 - The Chat and Calls should be treated as indpendent logical apps but brought together via a common UI shell. 
 - The app should support a common non-presentation layers and separate presentation layers for different UX requirements. 
 - The build system should be able to generate apps for a specified UX. 
-- There should be flexibility to have custom UI for desktop vs mobile platforms.  
+- There should be flexibility to have custom UI for desktop vs mobile platforms. 
+- offline-first 
+- multi-device support 
