@@ -9,6 +9,16 @@
   - Remote Desktop 
 
 ## High Level Features
+
+### Authentication
+- integrate with Circle Foundations for authentication
+
+### Contacts 
+- sync the contacts list from the Circle Foundations
+
+### Contact Presence
+- sync the contacts presence from Circle Foundations
+
 ### Chat
 *   **Manage channels**
     *   Create, update, and delete direct, public, and group channels
@@ -19,13 +29,9 @@
 *   **Join or leave channels**
     *   Allow users to join channels of interest or relevance and leave channels that are no longer needed
 *   **Reference channels**
-    *   Let users mention specific channels in a chat conversation by typing `#` followed by at least the first three letters of the channel name
+    *   Let users mention specific channels in a chat conversation by typing `@` followed by at least the first three letters of the channel name
 *   **Add typing indicator**
     *   Provide real-time feedback to users when someone is composing a message
-*   **Manage users**
-    *   Create, edit, and remove users
-*   **Check user presence**
-    *   Display real-time online status of users in the app or per channel, showing if they are online, offline, active, or away
 *   **Mention users**
     *   Tag specific individuals within a chat by typing `@` followed by the first three letters of a username, triggering a list of suggestions
 *   **Manage channel and user access**
@@ -64,10 +70,35 @@
     *   Flag or report messages deemed inappropriate
 *   **Receive mobile push notifications**
     *   Support push notifications on mobile devices to alert users of new messages, mentions, or other significant activities
-    
+
 ### Calls
-- 
-### Remote Desktop
-- 
+*   **One-to-One Voice and Video Calls**
+    * Initiating Calls
+    * Incoming Call UI
+    * In-Call Interface (1:1)
+    * Call Notification and Logs
+    * Call Waiting and Switching
+    * Performance and Quality
+
+*   **Group Calls (Voice and Video)**
+    * Group Call Size: 32 participants
+    * Starting a Group Call
+      * Call Button
+      * Call Link
+      * Scheduled Call
+    * Group Call Joining
+    * In-Call UI (Group Call)
 
 ## Define High Level Architecture Requirements
+- Authentication, Contacts, User Profile, User Presence will be imported from Circle Foundations. 
+- Platform support:
+  - iOS
+  - Android
+  - Windows
+  - Mac
+- Achieving parity - Features and UX: 
+  - for each Circle customer, the resistance to switching to TeamSync should be minimal. TeamSync should provide them with all the key features they were using in an identical/familiar UX. 
+- The Chat and Calls should be treated as indpendent logical apps but brought together via a common UI shell. 
+- The app should support a common non-presentation layers and separate presentation layers for different UX requirements. 
+- The build system should be able to generate apps for a specified UX. 
+- There should be flexibility to have custom UI for desktop vs mobile platforms.  
