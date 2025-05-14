@@ -72,22 +72,198 @@
     *   Support push notifications on mobile devices to alert users of new messages, mentions, or other significant activities
 
 ### Calls
-*   **One-to-One Voice and Video Calls**
-    * Initiating Calls
-    * Incoming Call UI
-    * In-Call Interface (1:1)
-    * Call Notification and Logs
-    * Call Waiting and Switching
-    * Performance and Quality
 
-*   **Group Calls (Voice and Video)**
-    * Group Call Size: 32 participants
-    * Starting a Group Call
-      * Call Button
-      * Call Link
-      * Scheduled Call
-    * Group Call Joining
-    * In-Call UI (Group Call)
+#### 1. User Presence Slice
+- Real-time user online status
+- Custom status messages (Available, Busy, Away)
+- User device capabilities detection (camera/microphone)
+- Call availability indicators
+- Automatic status updates when in calls
+- Favorites and recent contacts
+
+#### 2. Basic Calling Slice
+- Initiate outgoing calls (direct ringing)
+- Receive incoming calls
+- Call acceptance/rejection
+- Basic audio/video transmission
+- Call termination
+- Fallback to audio-only mode during poor network conditions
+- Enable PIP (Picture-in-Picture) mode for multitasking
+- Call event notifications (start, join, leave, end, disconnect)
+
+#### 3. Media Quality Slice
+- Camera selection and configuration
+- Microphone selection and configuration
+- Video resolution and bitrate management
+- Bandwidth adaptation
+- Network quality indicators
+- Background blur/replacement
+- Noise suppression
+- Lighting adjustment
+- Beauty filters
+- Change view layouts (speaker, grid, pinned)
+
+#### 4. Call Scheduling Slice
+- Schedule future calls with date/time selection
+- Create recurring calls (daily, weekly, monthly)
+- Generate shareable call links
+- Send call invites via email
+- Send invites via in-app notifications
+- Integration with Google Calendar
+- Integration with Outlook Calendar
+- Integration with in-app calendar
+- Calendar view of upcoming calls
+- Call reminders and notifications
+- Edit or cancel scheduled calls
+- Time zone management
+
+#### 5. Group Call Management Slice
+- Create and manage group calls
+- View participant list
+- Mute/unmute individual participants
+- Remove participants from calls
+- Raise hand functionality
+- Emoji reactions during calls
+- Add participants to ongoing calls
+- Restrict call access (passcodes, waiting rooms)
+- Host approval for participants
+- Lock room to prevent new joins
+- Transfer host privileges
+- Participant capacity management
+- In-call polling/voting
+
+#### 6. In-Call Collaboration Slice
+- In-call text chat messaging
+- File sharing during calls
+- Link sharing in chat
+- Emoji and reaction support in chat
+- Chat history preservation
+- Whiteboard collaboration
+- Note-taking during calls
+- Task assignment
+- Chat moderation tools
+- Message formatting
+- Read receipts
+
+#### 7. Screen Sharing Slice
+- Whole screen sharing
+- Application window sharing
+- Screen selection interface
+- Screen share controls (start/stop)
+- Screen sharing indicators
+- Pause/resume screen sharing
+- Adjust screen sharing resolution
+- Audio sharing with screen
+- Presenter switching
+- Screen annotations
+- Highlight cursor option
+- Mobile screen sharing
+
+#### 8. Remote Control Slice
+- Request/grant remote control
+- Mouse control transmission
+- Keyboard input transmission
+- Control session termination
+- Switch between multiple screens/monitors
+- Transfer files between machines
+- Clipboard synchronization
+- Annotate remote screen
+- Switch control roles between participants
+- Enable/disable remote input
+- Send keyboard shortcuts (Ctrl+Alt+Del, Alt+Tab)
+- Reconnect automatically after interruption
+- Monitor session status (connection strength, latency)
+- Set session time limits
+- Session notifications (start, end, timeouts)
+- Log remote session history
+
+#### 9. Call Recording Slice
+- Server-side recording
+- Recording controls (start/stop)
+- Recording status indicators
+- Recorded call management
+- Recording playback
+- Recording permissions management
+- Auto-recording option
+- Recording encryption
+- Recording transcription
+- Recording storage management
+- Recording sharing options
+- Recording retention policies
+- Recording notifications for participants
+
+#### 10. Call History Slice
+- Call history listing
+- Call metadata (duration, participants, timestamps)
+- Call categorization (missed, completed, rejected)
+- Call history search and filtering
+- Call statistics and analytics
+- Export call logs
+- Delete call history entries
+- Call rating and feedback
+- Call history synchronization
+- Call continuation (redial)
+
+#### 11. Notification Slice
+- Incoming call push notifications
+- Missed call notifications
+- Call reminder notifications
+- Notification preferences
+- Silent hours configuration
+- Custom notification sounds
+- Vibration patterns
+- LED indicator customization (Android)
+- Notification action buttons
+- Notification grouping
+- Read/unread status
+- Do Not Disturb integration
+
+#### 12. Security & Compliance Slice
+- End-to-end encryption
+- Call privacy controls
+- Audit logging
+- GDPR compliance tools
+- Security settings
+- Meeting password protection
+- Consent for recording
+- Session locking
+- Anti-abuse measures
+- Data retention controls
+- Export user data tools
+- IP restriction options
+- Two-factor authentication for sensitive calls
+- Sensitive information detection
+
+#### 13. Accessibility Slice
+- Screen reader compatibility
+- Keyboard navigation
+- Closed captioning
+- Transcription
+- High contrast mode
+- Font size adjustments
+- Color blindness accommodations
+- Reduced motion option
+- TTY/TDD compatibility
+- Assistive technology integrations
+- Accessibility preferences
+- Keyboard shortcuts
+- Focus indicators
+
+#### 14. Core Infrastructure Slice
+- Flutter App Structure
+- Supabase Integration
+- LiveKit Integration
+- State Management
+- Error Handling
+- Event Bus
+- Offline capability
+- Database schema design
+- Performance monitoring
+- Crash reporting
+- Analytics framework
+- Localization infrastructure
+- Theme management
+- Device capability detection
 
 ## Define High Level Architecture Requirements
 - Authentication, Contacts, User Profile, User Presence will be imported from Circle Foundations. 
