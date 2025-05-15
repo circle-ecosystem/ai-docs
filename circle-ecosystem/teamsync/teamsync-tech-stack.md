@@ -2,7 +2,9 @@
 
 ## Introduction
 
-This document outlines the technology stack and architectural decisions for the TeamSync chat application. TeamSync integrates with the Circle Ecosystem to provide text chat, audio/video calls, and remote desktop functionality. This document focuses primarily on the chat functionality, with calls to be addressed separately.
+This document outlines the comprehensive technology stack and architectural decisions for the TeamSync communication app. TeamSync integrates with the Circle Ecosystem to provide text chat, audio/video calls, and remote desktop functionality, with a focus on delivering a premium experience for executive users such as CEOs.
+
+This tech stack is optimized for Claude Code compatibility, ensuring consistent, high-quality code generation throughout the development process.
 
 ## Core Technology Choices
 
@@ -17,6 +19,8 @@ This document outlines the technology stack and architectural decisions for the 
 
 ### Backend
 - **Supabase** for database, authentication, storage, and serverless functions
+- **Direct Supabase Client + Row Level Security (RLS)** for most operations
+- Edge Functions reserved for complex features as needed
 
 ## Architectural Approach
 
@@ -94,15 +98,43 @@ This document outlines the technology stack and architectural decisions for the 
 ## UI/UX Implementation
 
 ### Component Framework
-- **Material Components + Style Adapter Pattern**
-- Slice-specific UI adapters for multiple presentation styles
-- Support for different UX variants (WhatsApp, Slack, Teams)
-- Only one presentation layer compiled into final app
+- **DECISION PENDING** - Requires further analysis for executive user experience
+- Options under consideration:
+  1. **Material Components + Style Adapter Pattern**:
+     - Pros: Well-documented, Claude Code familiar with patterns, consistent cross-platform behavior
+     - Cons: May look too "Google-like", requires extensive customization for executive users
+
+  2. **MacOS UI**:
+     - Pros: Native Apple aesthetics, premium feel appropriate for executives, authentic macOS experience
+     - Cons: Limited to macOS platform, requires custom implementation for other platforms
+
+  3. **Forui**:
+     - Pros: Minimalist elegance, platform-agnostic design with premium feel, extensive theming capabilities
+     - Cons: Newer library with potentially less community support
+
+  4. **Custom Component Library**:
+     - Pros: Complete control over appearance and behavior, perfect alignment with executive expectations
+     - Cons: Significant development effort, more code to maintain
 
 ### Build Configuration
 - **Build Flavors with Product Flavors**
 - Flavor-specific assets and configurations
 - Clear separation at build time
+
+### Adaptive & Responsive Design Approach
+- **DECISION PENDING** - Requires further analysis of UI differences across platforms
+- Options under consideration:
+  1. **Platform-specific subfolders**:
+     - Pros: Clear separation by platform, explicit platform-specific code
+     - Cons: Duplication, more folders to maintain
+
+  2. **Adaptive components approach**:
+     - Pros: Centralized adaptation logic, less duplication, Claude Code friendly
+     - Cons: May not handle fundamental UI paradigm differences
+
+  3. **Platform-specific presentation layers**:
+     - Pros: Complete UI independence, platform-optimized patterns, maximum flexibility
+     - Cons: Most duplication, separate maintenance for each platform
 
 ## Testing Strategy
 
@@ -121,6 +153,13 @@ This document outlines the technology stack and architectural decisions for the 
 - Structured approach to error logging
 - Integration with build flavors for environment-specific handling
 
+## Analytics & Monitoring
+
+- **Firebase Analytics + Crashlytics Integration**
+- Comprehensive solution for tracking usage and errors
+- Good Flutter support
+- Integration with the existing error handling approach
+
 ## Push Notifications
 
 - **Firebase Cloud Messaging**
@@ -136,19 +175,62 @@ This document outlines the technology stack and architectural decisions for the 
 ## Development Tools & Quality Assurance
 
 ### Development Tooling
-- **flutter_lints** for standard linting rules
-- Potential future expansion with custom_lint as needed
-- Dart code formatting enforced in CI
+- **Melos + build_runner**
+- Powerful tool for monorepo management
+- Supports running commands across packages
+- Good integration with CI/CD pipelines
+
+### CI/CD Pipeline
+- **GitHub Actions + Custom Build Scripts**
+- Highly customizable
+- Integrated with chosen GitHub workflow
+- Capability to deploy to all required app stores (mobile and desktop)
+
+### Auto-Update Solution
+- **Shorebird Code Push**
+- Flutter-specific solution for partial updates
+- Support for controlled rollouts
+- Bypasses app store review process
+- Works for both mobile and desktop platforms
 
 ### Documentation
 - **Architecture Decision Records (ADRs)** for key decisions
 - Documented patterns for Claude Code reference
 - Clear API documentation for PubNub-inspired interfaces
 
-### CI/CD Pipeline
-- **GitHub Actions with Feature Branch Workflow**
-- Automated testing and linting for PRs
-- Separate build jobs for each UI variant
+## Sections Pending Decisions
+
+### Security Practices Beyond Authentication
+- **DECISION SKIPPED** - To be addressed in future iterations
+- Options for future consideration:
+  1. **Comprehensive Security Package**:
+     - App obfuscation, certificate pinning, secure storage, jailbreak detection
+     - Pros: Thorough protection, addresses multiple threat vectors
+     - Cons: Implementation complexity, potential performance impact
+
+  2. **Focused Data Security Approach**:
+     - Encrypted local storage, secure network communication, minimal data retention
+     - Pros: Concentrates on protecting user data, simpler implementation
+     - Cons: May leave some attack vectors unaddressed
+
+  3. **Security-as-a-Service Integration** (e.g., AppSweep, Data Theorem):
+     - Pros: Ongoing security monitoring, regular vulnerability assessments
+     - Cons: Subscription costs, external dependency
+
+### Internationalization Strategy
+- **DECISION SKIPPED** - To be addressed in future iterations
+- Options for future consideration:
+  1. **Flutter Intl Package with ARB Files**:
+     - Pros: Official approach, good IDE support, code generation
+     - Cons: Manual file management, more complex setup
+
+  2. **Easy Localization with JSON Files**:
+     - Pros: Simpler setup, JSON-based translations, good for non-developers
+     - Cons: Less IDE integration, potential performance concerns
+
+  3. **GetX Translation Management**:
+     - Pros: Integrated with broader GetX ecosystem, simple API
+     - Cons: Ties you to GetX, less separation of concerns
 
 ## Implementation Notes for Claude Code
 
@@ -158,11 +240,12 @@ This document outlines the technology stack and architectural decisions for the 
 4. Implement UI components according to the Style Adapter Pattern
 5. Ensure error handling follows established middleware patterns
 6. Document new components and decisions with ADRs
+7. Use Melos scripts for standardized development commands
+8. Follow GitHub Actions workflow patterns for CI/CD
 
 ## Appendix
 
 ### Additional Tools To Consider
-- Data analytics integration
-- A/B testing framework
 - Accessibility compliance testing
-- Performance monitoring
+- Performance profiling and optimization
+- Integration with advanced analytics for CEO-specific insights
