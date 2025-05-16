@@ -13,18 +13,19 @@ Identify the pre-requisites deliverables for TeamSync prior to initiating Agenti
 - [x] Define detailed Tech Stack 
 
 ## Vertical Slices Identification 
-- [x] Identify the Vertical Slices for TeamSync
+- [x] Identify the Vertical Slices for TeamSync Chat
+- [ ] Identify the Vertical Slices for TeamSync Call
 
 ## Technical Design Document 
 - [ ] Chat Technical Design 
 - [ ] Call Technical Design
 
 ## Database Design 
-- [ ] Chat Database Design 
+- [x] Chat Database Design 
 - [ ] Call Database Design
 
 ## API Layer Design 
-- [ ] Chat API Design 
+- [x] Chat API Design 
 - [ ] Call API Design
 
 ## UI Screens Mockup
