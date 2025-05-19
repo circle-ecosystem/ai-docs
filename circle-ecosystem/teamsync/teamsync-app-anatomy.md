@@ -737,3 +737,8 @@ The key to making Drift and Supabase work together:
 This architecture provides a responsive UI experience with offline capabilities while ensuring data consistency with the backend.
 
 Does this cover what you were looking for? Is there any specific aspect of the TeamSync architecture you'd like me to elaborate on?
+
+```mermaid
+flowchart LR
+    DB["Drift DB\nChange"] --> Stream["Reactive Stream\nemits new value"] --> Repo["Repository\ntransforms data"] --> Riverpod["Riverpod\nupdates state"] --> UI["UI\nrebuilds"]
+```
