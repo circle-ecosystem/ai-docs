@@ -40,11 +40,9 @@ This report outlines the recommended folder structure for the TeamSync Flutter a
         event_table.dart            # Drift table definition
         event_dao.dart              # Data Access Object
         event_dao_test.dart         # DAO tests
+      /providers                     # Riverpod providers for this slice
       /assets                        # Feature-specific assets
       /integration_tests             # Feature-specific integration tests
-    
-    /user_management                 # User Management slice (APIs 6-16)
-      # Same structure as events_system
     
     /channel_management              # Channel Management slice (APIs 17-36)
       # Same structure as events_system
@@ -84,14 +82,35 @@ This report outlines the recommended folder structure for the TeamSync Flutter a
         database_test.dart           # Database tests
       /sync                          # Data synchronization
       /connectivity                  # Network management
+      /error_handling                # Error middleware & Crashlytics
+      /push_notifications            # FCM integration
   
   /calls                             # Calls application (placeholder)
-    # Similar structure to chat - to be developed later
+    /core_infrastructure             # Calls-specific infrastructure
+      # Similar structure to chat's core_infrastructure with calls-specific implementations
+    # Other calls-specific slices to be developed later
   
   /app_shared                        # Shared across chat and calls
     /models                          # Truly global models
     /utils                           # Truly global utilities
     /constants                       # Global constants
+    
+    /user_management                 # User Management slice (APIs 6-16)
+      /models                        # User domain models
+      /repository
+        /interfaces                  # Repository interfaces
+        /implementations             # Concrete implementations
+      /drift                         # Local database components
+      /providers                     # Riverpod providers
+      /integration_tests             # Feature-specific integration tests
+    
+    /infrastructure_interfaces       # Shared interfaces for infrastructure components
+      /database_interface            # Database interface definitions
+      /sync_interface                # Synchronization interface definitions
+      /error_handling_interface      # Error handling interface definitions
+
+    /config                          # Configuration
+      /build_flavors                 # Build flavor management
 
 /integration_test                    # Standard Flutter integration test entry points
   chat_app_test.dart                 # Entry point that imports all chat tests
@@ -116,10 +135,23 @@ This report outlines the recommended folder structure for the TeamSync Flutter a
   test_setup.dart                    # Test setup script
   test_utils.dart                    # Common test utilities
 
-/claude_code_helpers                 # Resources for Claude Code
+/.claude                             # Resources for Claude Code
   /templates                         # Code templates for consistency
   /prompts                           # Example prompts for code generation
   /examples                          # Complete examples
+
+/ai_docs                             # Knowledge repository for AI tools
+  /architecture                      # Architectural documentation
+  /domain                            # Domain model explanations
+  /patterns                          # Coding patterns and standards
+  /workflows                         # Development workflows
+  /glossary                          # Project-specific terminology
+
+/specs                               # AI prompts for specific development tasks
+  /templates                         # Reusable prompt templates
+  /completed                         # Successfully used prompts
+  /in_progress                       # Prompts being developed/used
+  /patterns                          # Best practices for prompt creation
 ```
 
 ## Structure Explanation and Justification
@@ -176,12 +208,70 @@ Assets are managed at three levels:
 
 ### 7. Core Infrastructure
 
-Core shared services are centralized:
+Core shared services are centralized within each app:
 
-- **Supabase Client**: Single initialization point
-- **Drift Database**: Central configuration with distributed tables
-- **Realtime Handling**: Core setup with feature-specific extensions
-- **Reason**: Avoids duplication while maintaining clean organization
+- **Chat Infrastructure**: Maintained in `/chat/core_infrastructure`
+- **Calls Infrastructure**: Maintained in `/calls/core_infrastructure`
+- **Shared Interfaces**: Only interfaces are shared in `/app_shared/infrastructure_interfaces`
+- **Reason**: Maintains independence between chat and calls apps, allowing them to be separated if needed
+
+### 8. Riverpod Providers
+
+Each vertical slice includes a providers directory:
+
+- **Slice-Specific Providers**: State management and dependency injection
+- **Type-Safe Access**: Leverages Riverpod's code generation capabilities
+- **Benefit**: Consistent state management pattern across features
+
+### 9. Error Handling & Push Notifications
+
+Dedicated folders for error handling and push notifications:
+
+- **Error Middleware**: Centralized error handling strategy
+- **Push Notification Integration**: FCM integration components
+- **Benefit**: Structured approach to cross-cutting concerns
+
+### 10. Build Flavors
+
+Configuration for different build environments:
+
+- **Flavor Management**: Environment-specific settings
+- **Deployment Targets**: Configuration for different platforms
+- **Benefit**: Clean separation of environment-specific code
+
+### 11. User Management
+
+User management is placed in the app_shared folder:
+
+- **Shared Functionality**: User profiles and authentication are used by both chat and calls
+- **Consistent Experience**: Users have the same identity across applications
+- **Benefit**: Avoids duplication of user-related code
+
+### 12. Claude Code Configuration
+
+Claude Code configuration is in a hidden dot folder:
+
+- **Convention**: Follows standard practice for tool configuration folders
+- **Separation**: Visually separates tool configuration from application code
+- **Benefit**: Cleaner project structure that follows industry standards
+
+### 13. AI Documentation
+
+The ai_docs folder serves as a knowledge repository for AI tools:
+
+- **Project Knowledge**: Contains architectural information and context
+- **Accessibility**: Provides a consistent location for AI tools to access project knowledge
+- **Persistence**: Creates persistent memory that AI tools can reference across sessions
+- **Benefit**: Improves AI tool effectiveness by providing rich context about the project
+
+### 14. AI Prompts
+
+The specs folder contains AI prompts for specific development tasks:
+
+- **Task Instructions**: Detailed prompts for AI coding tools
+- **Reusability**: Maintains successful prompt patterns for future use
+- **Knowledge Sharing**: Enables teams to share effective prompting techniques
+- **Benefit**: Increases development efficiency by standardizing interaction with AI tools
 
 ## Sample Code Examples
 
@@ -533,7 +623,7 @@ class MessageDao {
 import 'package:drift/drift.dart';
 import 'package:teamSync/chat/messaging/drift/message_table.dart';
 import 'package:teamSync/chat/channel_management/drift/channel_table.dart';
-import 'package:teamSync/chat/user_management/drift/user_table.dart';
+import 'package:teamSync/app_shared/user_management/drift/user_table.dart';
 // Other imports...
 
 part 'database.g.dart';
@@ -697,7 +787,7 @@ import 'package:teamSync/chat/messaging/repository/implementations/message_repos
 import 'package:teamSync/chat/messaging/drift/message_dao.dart';
 
 class MockSupabaseClient extends Mock implements SupabaseClient {}
-class MockGotrueClient extends Mock implements GoTrueClient {}
+class MockGoTrueClient extends Mock implements GoTrueClient {}
 class MockMessageDao extends Mock implements MessageDao {}
 class MockSupabaseQueryBuilder extends Mock implements SupabaseQueryBuilder {}
 
@@ -907,8 +997,11 @@ The proposed folder structure for TeamSync Flutter application supports:
 2. **Claude Code Optimization**: Maximizing context containment to enhance AI-assisted development
 3. **Test Integration**: Collocating tests with implementation for better context
 4. **Database Management**: Balancing standard migration practices with feature organization
-5. **Feature Isolation**: Minimizing cross-feature dependencies
+5. **Feature Isolation**: Minimizing cross-slice dependencies
 6. **Adherence to Patterns**: Following PubNub-inspired API design
+7. **App Independence**: Maintaining separation between chat and calls apps to allow for future standalone deployment
+8. **Shared Components**: Appropriately sharing user management and common interfaces while keeping implementations app-specific
+9. **AI Development Support**: Comprehensive organization of AI documentation and prompts to maximize AI-assisted development efficiency
 
 By implementing this structure, the TeamSync app will benefit from:
 - Clearer code organization
